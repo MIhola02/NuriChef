@@ -17,6 +17,7 @@ const schema = {
       items: { type: "string", pattern: "^(?!\\s*$).+" },
       minItems: 1,
     },
+    ownerID: { type: "string" },
     photoFilename: { type: "string" },
   },
   required: ["date", "name"],
@@ -31,7 +32,6 @@ async function CreateAbl(req, res) {
     // File informatio in req.file
     if (req.file) {
       console.log("Uploaded file:", req.file);
-      // You might want to add the file path to the recipe object
       recipe.photoFilename = req.file.filename;
     }
 

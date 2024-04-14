@@ -75,10 +75,31 @@ function list() {
   }
 }
 
+function listByOwner(ownerID) {
+  console.log("filtering...");
+  try {
+    const files = fs.readdirSync(recipeFolderPath);
+    const recipeList = files
+      .map((file) => {
+        const fileData = fs.readFileSync(
+          path.join(recipeFolderPath, file),
+          "utf8"
+        );
+        const recipe = JSON.parse(fileData);
+        return recipe;
+      })
+      .filter((recipe) => recipe.ownerID === ownerID); // Filter recipes by ownerID
+    return recipeList; // Return the filtered list
+  } catch (error) {
+    throw { code: "failedToListRecipes", message: error.message };
+  }
+}
+
 module.exports = {
   get,
   create,
   update,
   remove,
   list,
+  listByOwner,
 };
