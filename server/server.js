@@ -7,7 +7,11 @@ const app = express();
 const path = require("path");
 const photoFolderPath = path.join(__dirname, "DAO", "storage", "photoUploads");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", 
+  })
+);
 
 app.use(express.json());
 

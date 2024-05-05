@@ -27,6 +27,8 @@ const schema = {
 async function CreateAbl(req, res) {
   try {
     // JSON string under 'recipe' ky
+    console.log("req.body.recipe:", req.body.recipe);
+    // let recipe = req.body.recipe;
     let recipe = JSON.parse(req.body.recipe);
 
     // File informatio in req.file
@@ -49,6 +51,7 @@ async function CreateAbl(req, res) {
     recipe = await recipeDao.create(recipe); // Ensure this is awaited or handled correctly
     res.json(recipe);
   } catch (e) {
+    console.error("Error processing request:", e);
     res.status(500).json({ message: e.message });
   }
 }
